@@ -1,0 +1,3 @@
+CREATE USER postgres;
+CREATE DATABASE fist_test;
+GRANT ALL PRIVILEGES ON DATABASE fist_test TO postgres;
