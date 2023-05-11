@@ -93,23 +93,27 @@
 					</v-card>
 				</v-container>
 				<v-row
-                    v-if="directions?.length > 0"
+                    id="directions"
                     no-gutters
-                    class="my-10 d-flex flex-column justify-center align-center"
                 >
-					<h3 class="text--secondary text-h5 font-weight-bold ma-5 text-center" id="directions">
-                        Направления подготовки
-					</h3>
-					<div class="text--secondary max__width_80 text-center">
-                        <v-container>
-                            <DirectionItem
-                                v-for="(direction, index) in directions"
-                                :key="index"
-                                :direction="direction"
-                                :index="index"
-                                class="my-4"
-                            ></DirectionItem>
-                        </v-container>
+                    <div
+                        v-if="directions?.length > 0"
+                        class="my-10 d-flex flex-column justify-center align-center"
+                    >
+                        <h3 class="text--secondary text-h5 font-weight-bold ma-5 text-center">
+                            Направления подготовки
+                        </h3>
+                        <div class="text--secondary max__width_80 text-center">
+                            <v-container>
+                                <DirectionItem
+                                    v-for="(direction, index) in directions"
+                                    :key="index"
+                                    :direction="direction"
+                                    :index="index"
+                                    class="my-4"
+                                ></DirectionItem>
+                            </v-container>
+                        </div>
                     </div>
 				</v-row>
 				<v-row
