@@ -12,94 +12,82 @@
                         @input="$v.email.$touch()"
                         @blur="$v.email.$touch()"
                     ></v-text-field>
-                   
-                    <v-btn
-                        class="mr-4 primary"
-                        @click="submit"
-                    >
+
+                    <v-btn class="mr-4 primary" @click="submit">
                         Отправить
                     </v-btn>
-                    <v-btn @click="clear">
-                        Очистить
-                    </v-btn>
+                    <v-btn @click="clear"> Очистить </v-btn>
                     <v-alert
-                      border="bottom"
-                      color="pink darken-1"
-                      dark
-                      v-if="errors"
-                      class="mt-4"
+                        border="bottom"
+                        color="pink darken-1"
+                        dark
+                        v-if="errors"
+                        class="mt-4"
                     >
-                      {{errors}}
+                        {{ errors }}
                     </v-alert>
                 </form>
             </v-card-text>
             <v-card-subtitle>
-                <nuxt-link to="/auth/">
-                    Войти в аккаунт
-                </nuxt-link>
+                <nuxt-link to="/auth/"> Войти в аккаунт </nuxt-link>
             </v-card-subtitle>
-           
         </v-card>
     </div>
 </template>
 
-
 <script>
-  import { validationMixin } from 'vuelidate'
-  import { required, email } from 'vuelidate/lib/validators'
+import { validationMixin } from "vuelidate";
+import { required, email } from "vuelidate/lib/validators";
 
-  export default {
+export default {
     mixins: [validationMixin],
 
     validations: {
-      email: {required, email}
+        email: { required, email },
     },
 
     data: () => ({
-      email: ''
+        email: "",
     }),
-    props:{
-      errors:{
-        type: String,
-        default: null
-      }
+    props: {
+        errors: {
+            type: String,
+            default: null,
+        },
     },
 
     computed: {
-      
-      emailErrors () {
-        const errors = []
-        if (!this.$v.email.$dirty) return errors
-        !this.$v.email.email && errors.push('Неверная почта')
-        !this.$v.email.required && errors.push('Введитте почту')
-        return errors
-      },
+        emailErrors() {
+            const errors = [];
+            if (!this.$v.email.$dirty) return errors;
+            !this.$v.email.email && errors.push("Неверная почта");
+            !this.$v.email.required && errors.push("Введитте почту");
+            return errors;
+        },
     },
 
     methods: {
-      submit () {
-        this.$v.$touch()
-        if(this.$v.$anyError) return
-        let user = {
-          email: this.email
-        }
-        this.$emit('submit', user)
-      },
-      clear () {
-        this.$v.$reset()
-        this.email = ''
-      },
+        submit() {
+            this.$v.$touch();
+            if (this.$v.$anyError) return;
+            let user = {
+                email: this.email,
+            };
+            this.$emit("submit", user);
+        },
+        clear() {
+            this.$v.$reset();
+            this.email = "";
+        },
     },
-  }
+};
 </script>
 
-
 <style>
-    .form_container{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 80vh;
-    }
+.form_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
 </style>
-

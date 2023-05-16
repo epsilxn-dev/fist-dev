@@ -7,7 +7,7 @@ export default ({ app }, inject) => {
                     formData.append(`${key}[${i}]`, obj[key][i]);
                 }
             } else if (key == imageKey) {
-                if(obj[key])
+                if (obj[key])
                     formData.append(key, obj[key], obj[key].name);
             } else {
                 formData.append(key, obj[key]);

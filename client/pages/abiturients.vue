@@ -137,7 +137,6 @@ export default {
     async fetch() {
         await this.$store.dispatch('directs/setDirections').then(res => {
         })
-        // this.links = this.$store.getters['abiturients/getLinks']
         this.directs = await this.$store.getters['directs/getDirections']
     },
 

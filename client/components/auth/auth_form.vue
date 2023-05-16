@@ -21,107 +21,97 @@
                         @input="$v.password.$touch()"
                         @blur="$v.password.$touch()"
                     ></v-text-field>
-                    <v-btn
-                        class="mr-4 primary"
-                        @click="submit"
-                    >
-                        Войти
-                    </v-btn>
-                    <v-btn @click="clear">
-                        Очистить
-                    </v-btn>
+                    <v-btn class="mr-4 primary" @click="submit"> Войти </v-btn>
+                    <v-btn @click="clear"> Очистить </v-btn>
                     <v-alert
-                      border="bottom"
-                      color="pink darken-1"
-                      dark
-                      v-if="errors"
-                      class="mt-4"
+                        border="bottom"
+                        color="pink darken-1"
+                        dark
+                        v-if="errors"
+                        class="mt-4"
                     >
-                      {{errors}}
+                        {{ errors }}
                     </v-alert>
                 </form>
             </v-card-text>
             <v-card-subtitle>
-                <nuxt-link to="/auth/register">
-                    Ещё нет аккаунта?
-                </nuxt-link>
-                <br>
-                <br>
-                <nuxt-link to="/auth/forget">
-                    Забыли пароль?
-                </nuxt-link>
+                <nuxt-link to="/auth/register"> Ещё нет аккаунта? </nuxt-link>
+                <br />
+                <br />
+                <nuxt-link to="/auth/forget"> Забыли пароль? </nuxt-link>
             </v-card-subtitle>
-           
         </v-card>
     </div>
 </template>
 
-
 <script>
-  import { validationMixin } from 'vuelidate'
-  import { required, maxLength, minLength, email } from 'vuelidate/lib/validators'
+import { validationMixin } from "vuelidate";
+import {
+    required,
+    maxLength,
+    minLength,
+    email,
+} from "vuelidate/lib/validators";
 
-  export default {
+export default {
     mixins: [validationMixin],
 
     validations: {
-      username: { required},
-      password: { required, minLength: minLength(8)}
+        username: { required },
+        password: { required, minLength: minLength(8) },
     },
 
     data: () => ({
-      username: '',
-      password: '',
+        username: "",
+        password: "",
     }),
-    props:{
-      errors:{
-        type: String,
-        default: null
-      }
+    props: {
+        errors: {
+            type: String,
+            default: null,
+        },
     },
     computed: {
-      
-      nameErrors () {
-        const errors = []
-        if (!this.$v.username.$dirty) return errors
-        !this.$v.username.required && errors.push('Введите имя пользователя')
-        return errors
-      },
-      passErrors () {
-        const errors = []
-        if (!this.$v.password.$dirty) return errors
-        !this.$v.password.minLength && errors.push('Неверная длина')
-        !this.$v.password.required && errors.push('Введите пароль')
-        return errors
-      },
+        nameErrors() {
+            const errors = [];
+            if (!this.$v.username.$dirty) return errors;
+            !this.$v.username.required &&
+                errors.push("Введите имя пользователя");
+            return errors;
+        },
+        passErrors() {
+            const errors = [];
+            if (!this.$v.password.$dirty) return errors;
+            !this.$v.password.minLength && errors.push("Неверная длина");
+            !this.$v.password.required && errors.push("Введите пароль");
+            return errors;
+        },
     },
 
     methods: {
-      submit () {
-        this.$v.$touch()
-        if(this.$v.$anyError) return
-        let user = {
-            username: this.username,
-            password: this.password
-        }
-        this.$emit('submit', user)
-      },
-      clear () {
-        this.$v.$reset()
-        this.username = ''
-        this.password = ''
-      },
+        submit() {
+            this.$v.$touch();
+            if (this.$v.$anyError) return;
+            let user = {
+                username: this.username,
+                password: this.password,
+            };
+            this.$emit("submit", user);
+        },
+        clear() {
+            this.$v.$reset();
+            this.username = "";
+            this.password = "";
+        },
     },
-  }
+};
 </script>
 
-
 <style>
-    .form_container{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 80vh;
-    }
+.form_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
 </style>
-

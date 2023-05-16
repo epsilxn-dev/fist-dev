@@ -1,8 +1,13 @@
 <template>
     <v-container>
         <div v-if="idea">
-            <v-img class="mt--2 labs_img d-flex text-center align-center justify-center" :src="base + idea.image" dark
-                width="100%" gradient="to top right, rgba(0,0,0,.2), rgba(25,32,72,.5)">
+            <v-img
+                class="mt--2 labs_img d-flex text-center align-center justify-center"
+                :src="base + idea.image"
+                dark
+                width="100%"
+                gradient="to top right, rgba(0,0,0,.2), rgba(25,32,72,.5)"
+            >
                 <h1 class="text-h2">
                     {{ idea.name }}
                 </h1>
@@ -29,16 +34,29 @@
                         <v-menu bottom rounded offset-x>
                             <template v-slot:activator="{ on }">
                                 <v-btn icon x-large v-on="on">
-                                    <v-avatar v-bind="$attrs" class="blue--text text--lighten-5"
-                                        :color="colors[Math.floor(Math.random() * colors.length)]">
-                                        <v-img v-if="idea.author.avatar" :src="base + idea.author.avatar"></v-img>
+                                    <v-avatar
+                                        v-bind="$attrs"
+                                        class="blue--text text--lighten-5"
+                                        :color="
+                                            colors[
+                                                Math.floor(
+                                                    Math.random() *
+                                                        colors.length
+                                                )
+                                            ]
+                                        "
+                                    >
+                                        <v-img
+                                            v-if="idea.author.avatar"
+                                            :src="base + idea.author.avatar"
+                                        ></v-img>
                                         <div v-else>
-                                            {{ idea.author.username.slice(0, 2) }}
+                                            {{
+                                                idea.author.username.slice(0, 2)
+                                            }}
                                         </div>
                                     </v-avatar>
-
                                 </v-btn>
-
                             </template>
 
                             <v-card class="pa-2 py-0">
@@ -46,7 +64,11 @@
                                     <div class="mx-auto text-center">
                                         <h3>{{ idea.author.username }}</h3>
                                         <div class="text-caption mt-1">
-                                            {{ idea.author.first_name + ' ' + idea.author.last_name }}
+                                            {{
+                                                idea.author.first_name +
+                                                " " +
+                                                idea.author.last_name
+                                            }}
                                         </div>
                                         <div class="text-caption mt-1">
                                             {{ idea.author.email }}
@@ -64,11 +86,19 @@
                     <div v-if="idea.likes" class="d-flex align-center">
                         <v-spacer />
                         {{ likes }}
-                        <v-icon :class="{ 'text--primary': isLiked }" @click="like" class="ma-2">
+                        <v-icon
+                            :class="{ 'text--primary': isLiked }"
+                            @click="like"
+                            class="ma-2"
+                        >
                             mdi-thumb-up
                         </v-icon>
                         {{ dislikes }}
-                        <v-icon :class="{ 'text--primary': isDisliked }" @click="dislike" class="ma-2">
+                        <v-icon
+                            :class="{ 'text--primary': isDisliked }"
+                            @click="dislike"
+                            class="ma-2"
+                        >
                             mdi-thumb-down
                         </v-icon>
                     </div>
@@ -80,7 +110,13 @@
                                 class="blue--text text--lighten-5 mr-2"
                                 :key="index"
                                 :user="item"
-                                :color="colors[Math.floor(Math.random() * colors.length)]"
+                                :color="
+                                    colors[
+                                        Math.floor(
+                                            Math.random() * colors.length
+                                        )
+                                    ]
+                                "
                             ></TeamItem>
                         </div>
                     </div>
@@ -97,9 +133,14 @@
                             </a>
                         </div>
                     </div>
-                    <div class="w-100 comments" v-if="commentaries.length !== 0">
+                    <div
+                        class="w-100 comments"
+                        v-if="commentaries.length !== 0"
+                    >
                         <div class="text-h5 text-center my-5">Комментарии</div>
-                        <v-card class="py-4 mt-2 pb-0 color--white d-flex flex-column justify-center align-center">
+                        <v-card
+                            class="py-4 mt-2 pb-0 color--white d-flex flex-column justify-center align-center"
+                        >
                             <div
                                 v-for="(item, index) in commentaries"
                                 :key="index"
@@ -127,11 +168,18 @@
                                         :comment="answer"
                                     ></CommentItem>
                                 </div>
-                                <v-divider v-if="index !== commentaries.length - 1"></v-divider>
+                                <v-divider
+                                    v-if="index !== commentaries.length - 1"
+                                ></v-divider>
                             </div>
                         </v-card>
                     </div>
-                    <div v-else class="text-h5 text-center text--secondary my-5">Пока комментариев нет</div>
+                    <div
+                        v-else
+                        class="text-h5 text-center text--secondary my-5"
+                    >
+                        Пока комментариев нет
+                    </div>
                     <AddComment
                         id="AddComments"
                         v-if="Object.keys(user).length"
@@ -140,81 +188,93 @@
                         class="my-5"
                         :to="to"
                     ></AddComment>
-                    <div v-else class="text-h5 text-center text--secondary my-5">
-                        <Nuxt-link class="text-h5" to="/auth">Авторизируйтесь</Nuxt-link> для отправки комментария
+                    <div
+                        v-else
+                        class="text-h5 text-center text--secondary my-5"
+                    >
+                        <Nuxt-link class="text-h5" to="/auth"
+                            >Авторизируйтесь</Nuxt-link
+                        >
+                        для отправки комментария
                     </div>
                 </v-col>
-                <v-col class="d-none d-md-block">
-                </v-col>
+                <v-col class="d-none d-md-block"> </v-col>
             </v-row>
         </div>
         <div v-else>
-            <div class="text-center mt-10">Вероятно, идея не была промодерирована</div>
+            <div class="text-center mt-10">
+                Вероятно, идея не была промодерирована
+            </div>
         </div>
     </v-container>
 </template>
 
-
 <script>
-import TeamItem from '~/components/projects/TeamItem.vue';
-import TagList from '~/components/UI/TagList.vue';
-import { mapState } from 'vuex';
-import StackList from '~/components/labs/StackList.vue';
-import AddComment from '~/components/news/AddComment.vue';
-import CommentItem from '~/components/UI/CommentItem.vue';
+import TeamItem from "~/components/projects/TeamItem.vue";
+import TagList from "~/components/UI/TagList.vue";
+import { mapState } from "vuex";
+import StackList from "~/components/labs/StackList.vue";
+import AddComment from "~/components/news/AddComment.vue";
+import CommentItem from "~/components/UI/CommentItem.vue";
 export default {
     head() {
         let descr = this.idea.information,
             title = this.idea.name,
-            type = 'site',
-            image = this.base + this.idea.image
+            type = "site",
+            image = this.base + this.idea.image;
         return {
             title: title,
             meta: [
-                { hid: 'description', name: 'description', content: descr },
-                { hid: 'og:title', name: 'og:title', content: descr },
-                { hid: 'og:description', name: 'og:description', content: descr },
-                { hid: 'og:type', name: 'og:type', content: type },
-                { hid: 'og:image', name: 'og:image', content: image },
-                { hid: 'vk:image', name: 'vk:image', content: image },
-            ]
-        }
+                { hid: "description", name: "description", content: descr },
+                { hid: "og:title", name: "og:title", content: descr },
+                {
+                    hid: "og:description",
+                    name: "og:description",
+                    content: descr,
+                },
+                { hid: "og:type", name: "og:type", content: type },
+                { hid: "og:image", name: "og:image", content: image },
+                { hid: "vk:image", name: "vk:image", content: image },
+            ],
+        };
     },
     components: {
         TagList,
         StackList,
         TeamItem,
         AddComment,
-        CommentItem
+        CommentItem,
     },
     async fetch() {
-        this.ideaId = this.$route.params.id
-        this.$axios.get(`api/v1/commentaries/?idea=${this.ideaId}`).then(res => {
-            this.ideaComments = res.data.data.results
-        }).catch((err) => {
-            this.error = err
-            this.ideaComments = []
-        })
-        if (this.$store.getters['ideas/getIdeas'].length === 0) {
-            this.idea = await this.$store.dispatch('ideas/setIdeas')
-        }
-        else {
-            this.idea = await this.$store.getters['ideas/getIdeas']
+        this.ideaId = this.$route.params.id;
+        this.$axios
+            .get(`api/v1/commentaries/?idea=${this.ideaId}`)
+            .then((res) => {
+                this.ideaComments = res.data.data.results;
+            })
+            .catch((err) => {
+                this.error = err;
+                this.ideaComments = [];
+            });
+        if (this.$store.getters["ideas/getIdeas"].length === 0) {
+            this.idea = await this.$store.dispatch("ideas/setIdeas");
+        } else {
+            this.idea = await this.$store.getters["ideas/getIdeas"];
         }
 
-        this.idea = this.idea.find(item => item.id == this.ideaId)
-        if (!this.idea) this.idea = false
-        this.likes = this.idea.likes.length
-        this.dislikes = this.idea.dislikes.length
+        this.idea = this.idea.find((item) => item.id == this.ideaId);
+        if (!this.idea) this.idea = false;
+        this.likes = this.idea.likes.length;
+        this.dislikes = this.idea.dislikes.length;
         for (let item of this.idea.likes) {
             if (item == this.user.id) {
-                this.isLiked = true
+                this.isLiked = true;
             }
         }
 
         for (let item of this.idea.dislikes) {
             if (item == this.user.id) {
-                this.isDisliked = true
+                this.isDisliked = true;
             }
         }
         this.breadcrumbs.push({
@@ -222,30 +282,30 @@ export default {
             disabled: true,
             to: `/ideas/${this.ideaId}`,
             exact: true,
-        })
+        });
     },
     data() {
         return {
             authorId: false,
             snackbar: false,
             colors: [
-                'primary',
-                'success',
-                'cyan',
-                'red',
-                'green',
-                'indigo',
-                'deep-purple'
+                "primary",
+                "success",
+                "cyan",
+                "red",
+                "green",
+                "indigo",
+                "deep-purple",
             ],
             breadcrumbs: [
                 {
-                    text: 'fist.ulstu.ru',
-                    to: '/',
+                    text: "fist.ulstu.ru",
+                    to: "/",
                     exact: true,
                 },
                 {
-                    text: 'ideas',
-                    to: '/ideas',
+                    text: "ideas",
+                    to: "/ideas",
                     exact: true,
                 },
             ],
@@ -257,134 +317,153 @@ export default {
             isDisliked: false,
             ideaId: 0,
             ideaComments: [],
-
-        }
+        };
     },
     methods: {
         reply(comment) {
-            this.to = comment
+            this.to = comment;
         },
         reset() {
-            this.to = false
+            this.to = false;
         },
         snack() {
-            this.snackbar = false
-            this.$router.push('/auth')
+            this.snackbar = false;
+            this.$router.push("/auth");
         },
         like() {
-            this.$axios.post('api/v1/ideas/likes/',
-                {
-                    id: this.ideaId
-                },
-                {
-                    withCredentials: true,
-                    headers: {
-                        'Authorization': `Bearer ${this.accessToken}`,
+            this.$axios
+                .post(
+                    "api/v1/ideas/likes/",
+                    {
+                        id: this.ideaId,
+                    },
+                    {
+                        withCredentials: true,
+                        headers: {
+                            Authorization: `Bearer ${this.accessToken}`,
+                        },
                     }
-                }
-            ).then(res => {
-                if (res.data.data) {
-                    this.likes += 1
-                    if (this.isDisliked) {
-                        this.dislikes -= 1
+                )
+                .then((res) => {
+                    if (res.data.data) {
+                        this.likes += 1;
+                        if (this.isDisliked) {
+                            this.dislikes -= 1;
+                        }
+                    } else {
+                        this.likes -= 1;
                     }
-                } else {
-                    this.likes -= 1
-                }
-                this.isLiked = res.data.data
-                this.isDisliked = false
-            }).catch(res => this.snackbar = true)
+                    this.isLiked = res.data.data;
+                    this.isDisliked = false;
+                })
+                .catch((res) => (this.snackbar = true));
         },
         dislike() {
-            this.$axios.post('api/v1/ideas/dislikes/',
-                {
-                    id: this.ideaId
-                },
-                {
-                    withCredentials: true,
-                    headers: {
-                        'Authorization': `Bearer ${this.accessToken}`,
+            this.$axios
+                .post(
+                    "api/v1/ideas/dislikes/",
+                    {
+                        id: this.ideaId,
+                    },
+                    {
+                        withCredentials: true,
+                        headers: {
+                            Authorization: `Bearer ${this.accessToken}`,
+                        },
                     }
-                }
-            ).then(res => {
-                if (res.data.data) {
-                    this.dislikes += 1
-                    if (this.isLiked) {
-                        this.likes -= 1
+                )
+                .then((res) => {
+                    if (res.data.data) {
+                        this.dislikes += 1;
+                        if (this.isLiked) {
+                            this.likes -= 1;
+                        }
+                    } else {
+                        this.dislikes -= 1;
                     }
-                } else {
-                    this.dislikes -= 1
-                }
-                this.isDisliked = res.data.data
-                this.isLiked = false
-            }).catch(res => this.snackbar = true)
+                    this.isDisliked = res.data.data;
+                    this.isLiked = false;
+                })
+                .catch((res) => (this.snackbar = true));
         },
         deleteComment(id) {
-            this.$axios.delete(`api/v1/commentaries/${id}`, {
-                withCredentials: true,
-                headers: {
-                    'Authorization': `Bearer ${this.accessToken}`,
-                }
-            }).then(res => this.ideaComments.splice(this.ideaComments.findIndex(item => item.id == id), 1))
+            this.$axios
+                .delete(`api/v1/commentaries/${id}`, {
+                    withCredentials: true,
+                    headers: {
+                        Authorization: `Bearer ${this.accessToken}`,
+                    },
+                })
+                .then((res) =>
+                    this.ideaComments.splice(
+                        this.ideaComments.findIndex((item) => item.id == id),
+                        1
+                    )
+                );
         },
 
         addComment(comment) {
-            this.$axios.post(`api/v1/commentaries/`,
-                {
-                    parent_id: this.to ? this.to.id : null,
-                    idea: this.ideaId,
-                    message: comment
-                },
-                {
-                    withCredentials: true,
-                    headers: {
-                        'Authorization': `Bearer ${this.accessToken}`,
-                }
-            }).then(res => {
-                let result = JSON.parse(JSON.stringify(res.data.data))
-                if (!result.to){
-                    result = {...result, replies: []}
-                    this.ideaComments.push(result)
-                }
-            })
+            this.$axios
+                .post(
+                    `api/v1/commentaries/`,
+                    {
+                        parent_id: this.to ? this.to.id : null,
+                        idea: this.ideaId,
+                        message: comment,
+                    },
+                    {
+                        withCredentials: true,
+                        headers: {
+                            Authorization: `Bearer ${this.accessToken}`,
+                        },
+                    }
+                )
+                .then((res) => {
+                    let result = JSON.parse(JSON.stringify(res.data.data));
+                    if (!result.to) {
+                        result = { ...result, replies: [] };
+                        this.ideaComments.push(result);
+                    }
+                });
         },
-        getRandomColor() { return this.colors[Math.floor(Math.random() * this.colors.length)] }
+        getRandomColor() {
+            return this.colors[Math.floor(Math.random() * this.colors.length)];
+        },
     },
     computed: {
         commentaries() {
-            let comments = this.ideaComments ? [...this.ideaComments] : []
-            let parentCount = false
+            let comments = this.ideaComments ? [...this.ideaComments] : [];
+            let parentCount = false;
             for (let item of comments) {
-                item.replies = []
-                if (!item.parent_id) parentCount = true
-                item.author = item.user
-                item.text = item.message
+                item.replies = [];
+                if (!item.parent_id) parentCount = true;
+                item.author = item.user;
+                item.text = item.message;
                 for (let j of comments) {
                     if (item.id == j.parent_id && j.parent_id) {
-                        j.to = item.id
-                        item.replies.push(j)
+                        j.to = item.id;
+                        item.replies.push(j);
                     }
                 }
             }
-            return parentCount ? comments : []
+            return parentCount ? comments : [];
         },
-        ...mapState('auth', ['accessToken', 'base']),
+        ...mapState("auth", ["accessToken", "base"]),
         user: {
             get() {
-                return this.$store.getters['auth/getUser']
+                return this.$store.getters["auth/getUser"];
             },
             set(newValue) {
-                this.$store.commit('auth/setUser', newValue)
-            }
-        }
-    }
-}
+                this.$store.commit("auth/setUser", newValue);
+            },
+        },
+    },
+};
 </script>
-
 
 <style>
 .w-70 {
-    width: 70% !important
+    width: 70% !important;
 }
 
 .w-100 {
@@ -392,6 +471,6 @@ export default {
 }
 
 .comments {
-    margin: 0 auto
+    margin: 0 auto;
 }
 </style>

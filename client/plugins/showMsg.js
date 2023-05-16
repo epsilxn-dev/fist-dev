@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2'
 
 export default ({ app }, inject) => {
-    inject("showMsg", (msg = "Проверьте данные", type="error") => {
+    inject("showMsg", (msg = "Проверьте данные", type = "error") => {
         Swal.fire({
             position: 'center',
             icon: type,

@@ -34,92 +34,100 @@
                     @applyFilters="applyFilters"
                 ></department-filter>
             </v-col>
-
         </v-row>
     </v-container>
 </template>
 <script>
-import DepartmentFilter from '@/components/teachers/DepartmentFilter.vue'
-import TeacherItem from '@/components/teachers/TeacherItem.vue'
-import NoInfo from '~/components/UI/NoInfo.vue'
+import DepartmentFilter from "@/components/teachers/DepartmentFilter.vue";
+import TeacherItem from "@/components/teachers/TeacherItem.vue";
+import NoInfo from "~/components/UI/NoInfo.vue";
 
 export default {
     components: {
         "teacher-item": TeacherItem,
         "department-filter": DepartmentFilter,
-        "no-info": NoInfo
+        "no-info": NoInfo,
     },
     head() {
-        let descr = "Список всех преподаватаелей факультета информационных систем и технологий",
-            title = 'Преподаватели',
-            type = 'site'
+        let descr =
+                "Список всех преподаватаелей факультета информационных систем и технологий",
+            title = "Преподаватели",
+            type = "site";
         return {
             title: title,
             meta: [
-                {hid: 'description', name: 'description', content: descr},
-                {hid: 'og:title', name: 'og:title', content: descr},
-                {hid: 'og:description', name: 'og:description', content: descr},
-                {hid: 'og:type', name: 'og:type', content: type}
-            ]
-        }
+                { hid: "description", name: "description", content: descr },
+                { hid: "og:title", name: "og:title", content: descr },
+                {
+                    hid: "og:description",
+                    name: "og:description",
+                    content: descr,
+                },
+                { hid: "og:type", name: "og:type", content: type },
+            ],
+        };
     },
     async fetch() {
-        this.$store.dispatch('departments/setDepartments').then(res => this.departments = res)
+        this.$store
+            .dispatch("departments/setDepartments")
+            .then((res) => (this.departments = res));
 
-        await this.$store.dispatch('teachers/setTeachers').then(res => this.teachers = res)
+        await this.$store
+            .dispatch("teachers/setTeachers")
+            .then((res) => (this.teachers = res));
 
-        this.filter = [...this.departments.map(e => e.name)]
+        this.filter = [...this.departments.map((e) => e.name)];
 
         for (let d of this.departments) {
-            this.departmentColors[d.name] = this.colors[d.id]
+            this.departmentColors[d.name] = this.colors[d.id];
         }
         for (let t of this.teachers) {
-            t.departmentColor = this.departmentColors[t.department]
+            t.departmentColor = this.departmentColors[t.department];
         }
     },
     data() {
-        return ({
+        return {
             news: [],
             breadcrumbs: [
                 {
-                    text: 'fist.ulstu.ru',
-                    to: '/',
+                    text: "fist.ulstu.ru",
+                    to: "/",
                 },
                 {
-                    text: 'teachers',
+                    text: "teachers",
                     disabled: true,
                     exact: true,
-                    to: '/teachers',
+                    to: "/teachers",
                 },
             ],
             departments: [],
             colors: [
-                'primary',
-                'success',
-                'red',
-                'green',
-                'cyan',
-                'indigo',
-                'deep-purple'
+                "primary",
+                "success",
+                "red",
+                "green",
+                "cyan",
+                "indigo",
+                "deep-purple",
             ],
             departmentColors: [],
             teachers: [],
-            filter: []
-        })
+            filter: [],
+        };
     },
     methods: {
         applyFilters(filter) {
-            this.filter = filter
-        }
+            this.filter = filter;
+        },
     },
     computed: {
         filteredTeachers() {
-            return this.teachers.filter(item => {
-                return this.filter.includes(item.department.name) && item
-            })
-        }
+            return this.teachers.filter((item) => {
+                return this.filter.includes(item.department.name) && item;
+            });
+        },
     },
-}
+};
 </script>
 <style lang="scss" scoped>
 .grad_card {

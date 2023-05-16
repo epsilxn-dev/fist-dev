@@ -126,7 +126,6 @@ export default {
         }
         this.disciplines = disciplines
 
-
         this.breadcrumbs.push({
             text: this.directId,
             disabled: true,
