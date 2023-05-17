@@ -151,18 +151,19 @@
                         </div>
                     </v-card>
                 </v-container>
-                <v-row id="directions" no-gutters>
+                <v-row id="directions" no-gutters class="overflow-hidden">
                     <div
                         v-if="directions?.length > 0"
-                        class="my-10 d-flex flex-column justify-center align-center"
+                        class="my-10 d-flex justify-center flex-column"
+                        style="max-width: 100%"
                     >
                         <h3
-                            class="text--secondary text-h5 font-weight-bold ma-5 text-center"
+                            class="text--secondary text-h5 font-weight-bold text-center"
                         >
                             Направления подготовки
                         </h3>
-                        <div class="text--secondary max__width_80 text-center">
-                            <v-container>
+                        <div class="text--secondary text-center">
+                            <v-container style="padding: 1rem;">
                                 <DirectionItem
                                     v-for="(direction, index) in directions"
                                     :key="index"
