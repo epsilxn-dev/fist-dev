@@ -21,12 +21,6 @@
                         :error="passwordError"
                         class="my-4"
                     />
-                    <ChangeUsername
-                        :error="usernameError"
-                        @changeUsername="changeUsername"
-                        class="my-4"
-                        :item="user.username"
-                    />
                     <h2 class="text-h5 mb-2">Изменить резюме</h2>
                     <Add
                         v-if="!resume"

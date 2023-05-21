@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'tinymce',
     'filebrowser',
     # -----------------------------------------------
+    'rest_framework',
     'src.modules.user.identification',
     'src.modules.tags',
     'src.modules.user.user',
